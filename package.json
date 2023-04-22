@@ -6,12 +6,19 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "lint": "eslint src --ext js,jsx,ts,tsx --config .eslintrc.cjs",
+    "lint:fix": "eslint --fix src --ext js,jsx,ts,tsx --config .eslintrc.cjs",
+    "prettier": "prettier --check src/**/*.{js,jsx,ts,tsx} --config .prettierrc",
+    "prettier:fix": "prettier --wrtie src/**/*.{js,jsx,ts,tsx} --config .prettierrc",
+    "preview": "vite preview",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "class-variance-authority": "^0.5.2",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^1.12.0"
@@ -24,8 +31,10 @@
     "@vitejs/plugin-react": "^4.0.0-beta.0",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "husky": "^8.0.0",
     "postcss": "^8.4.23",
     "tailwindcss": "^3.3.1",
     "typescript": "^5.0.2",
@@ -33,3 +42,4 @@
     "vite-plugin-svgr": "^2.4.0"
   }
 }
+
