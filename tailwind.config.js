@@ -3,22 +3,30 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
+      lightmode: {
+        primary: '#2D2D2D',
+        'input-bg': '#F4F4F4',
+      },
+      darkmode: {
+        primary: '#FFF',
+        container: '#1F1F1F',
+        'input-bg': '#757575',
+      },
+      accent: '#A445ED',
       black: {
-        100: '#050505',
-        200: '#1F1F1F',
-        300: '#2D2D2D',
-        400: '#3A3A3A',
+        900: '#050505',
+        100: '#3A3A3A',
       },
       grey: {
-        100: '#2D2D2D',
-        200: '#F4F4F4',
-        300: '#E9E9E9',
-        400: 'F757575',
+        200: '#E9E9E9',
       },
-      purple: '#A445ED',
-      red: '#FF5252',
+      error: '#FF5252',
     },
-
+    screens: {
+      mobile: '375px',
+      tablet: '640px',
+      desktop: '1280px',
+    },
     extend: {},
   },
   plugins: [],
