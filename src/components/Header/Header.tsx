@@ -4,6 +4,7 @@ import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import { ReactComponent as MoonIcon } from '../../assets/images/icon-moon.svg';
 import { SelectBox, SelectObj } from '../SelectBox/SelectBox';
 import { Switch } from '@headlessui/react';
+import clsx from 'clsx';
 
 const typographyConfig: Array<SelectObj> = [
   { value: 'Sans Serif' },
@@ -24,14 +25,20 @@ export const Header: React.FC = () => {
           <Switch
             checked={enabled}
             onChange={setEnabled}
-            className={`cursur-pointer relative inline-flex px-[2px] items-center h-[22px] w-[42px] shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75
-            ${enabled ? 'bg-accent' : 'bg-input'}
-            `}
+            className={clsx(
+              'cursur-pointer relative inline-flex px-[2px] items-center h-[22px] w-[42px] shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75  bg-input',
+              {
+                'bg-accent': enabled,
+              }
+            )}
           >
             <span
-              className={`cursur-pointer inline-block h-[14px] w-[14px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out
-            ${enabled ? 'translate-x-5' : 'translate-x-0'}
-            `}
+              className={clsx(
+                'cursur-pointer inline-block h-[14px] w-[14px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out translate-x-0',
+                {
+                  'translate-x-5': enabled,
+                }
+              )}
             />
           </Switch>
           <MoonIcon className={`${enabled ? 'stroke-accent' : 'stroke-input'}`} />

@@ -16,6 +16,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "class-variance-authority": "^0.5.2",
+    "clsx": "^1.2.1",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.7",
