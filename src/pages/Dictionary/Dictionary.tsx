@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FlexBoxColumn } from '../../components/FlexBoxColumn/FlexBoxColumn';
 import WordHeader from './WordHeader';
 import Form from '../../components/Form';
+import { FlexBoxRow } from '../../components/FlexBoxRow/FlexBoxRow';
+import { SectionTitle } from '../../components/SectionTitle/SectionTitle';
 
 const people = [
   { id: 1, name: 'Wade Cooper' },
@@ -30,7 +32,7 @@ export const Dictionary: React.FC = () => {
     <FlexBoxColumn className='items-center text-lightmode-primary  px-7'>
       <Form />
       <WordHeader />
-      {/* TODO: Section title component with body */}
+      <SectionTitle title='noun' />
     </FlexBoxColumn>
   );
 };

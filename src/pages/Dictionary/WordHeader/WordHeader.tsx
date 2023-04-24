@@ -5,7 +5,7 @@ import { ReactComponent as PlayIcon } from '../../../assets/images/icon-play.svg
 
 export const WordHeader = () => {
   return (
-    <FlexBoxRow intent={'flexBetweenCenter'} className='w-full py-7'>
+    <FlexBoxRow intent={'flexBetweenCenter'} className='w-full pt-7'>
       <FlexBoxColumn className='gap-3'>
         <h1 className='text-4xl font-medium'>Dictionary</h1>
         <p className='text-xl font-normal text-accent'>/dlkjskldf/</p>
