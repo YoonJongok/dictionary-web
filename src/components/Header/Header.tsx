@@ -2,17 +2,23 @@ import React, { useState } from 'react';
 import { FlexBox } from '../FlexBox/FlexBox';
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import { ReactComponent as MoonIcon } from '../../assets/images/icon-moon.svg';
-import { SelectBox } from './SelectBox/SelectBox';
+import { SelectBox, SelectObj } from '../SelectBox/SelectBox';
 import { Switch } from '@headlessui/react';
+
+const typographyConfig: Array<SelectObj> = [
+  { value: 'Sans Serif' },
+  { value: 'Serif' },
+  { value: 'Mono' },
+];
 
 export const Header: React.FC = () => {
   const [enabled, setEnabled] = useState(false);
 
   return (
-    <FlexBox intent={'row'} modifier={'flexBetweenCenter'}>
+    <FlexBox intent={'row'} modifier={'flexBetweenCenter'} className='p-6'>
       <Logo />
       <FlexBox intent={'row'} modifier={'flexAroundCenter'} className='gap-4'>
-        <SelectBox />
+        <SelectBox selectConfig={typographyConfig} />
         <div className='w-[2px] h-8 bg-grey-200'></div>
         <FlexBox intent={'row'} className='items-center'>
           <Switch
