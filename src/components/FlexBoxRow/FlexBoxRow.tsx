@@ -4,8 +4,9 @@ import React, { FC, ReactNode } from 'react';
 const flexBoxRow = cva(['flex', 'flex-row'], {
   variants: {
     intent: {
-      flexCenterCenter: ['justify-center', 'items-center'],
+      flexStartStart: ['justify-start', 'items-start'],
       flexStartCenter: ['justify-start', 'items-center'],
+      flexCenterCenter: ['justify-center', 'items-center'],
       flexBetweenCenter: ['justify-between', 'items-center'],
       flexAroundCenter: ['justify-around', 'items-center'],
     },

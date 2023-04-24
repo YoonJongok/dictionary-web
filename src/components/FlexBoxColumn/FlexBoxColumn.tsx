@@ -5,6 +5,9 @@ const flexBoxColumn = cva(['flex ', 'flex-col'], {
   variants: {
     intent: {},
     modifier: {},
+    fullWidth: {
+      true: ['w-full'],
+    },
     defaultVariants: {},
   },
 });
@@ -20,10 +23,11 @@ export const FlexBoxColumn: FC<FlexBoxColumnProps> = ({
   intent,
   modifier,
   children,
+  fullWidth,
   ...props
 }) => {
   return (
-    <div {...props} className={flexBoxColumn({ intent, className, modifier })}>
+    <div {...props} className={flexBoxColumn({ intent, className, modifier, fullWidth })}>
       {children}
     </div>
   );
