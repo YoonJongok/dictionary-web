@@ -20,18 +20,18 @@ export const Header: React.FC = () => {
       <FlexBox intent={'row'} modifier={'flexAroundCenter'} className='gap-4'>
         <SelectBox selectConfig={typographyConfig} />
         <div className='w-[2px] h-8 bg-grey-200'></div>
-        <FlexBox intent={'row'} className='items-center'>
+        <FlexBox intent={'row'} className='items-center gap-3'>
           <Switch
             checked={enabled}
             onChange={setEnabled}
-            className={`${enabled ? 'bg-teal-900' : 'bg-teal-700'}
-          relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+            className={`cursur-pointer relative inline-flex px-[2px] items-center h-[22px] w-[42px] shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75
+            ${enabled ? 'bg-accent' : 'bg-input'}
+            `}
           >
-            <span className='sr-only'>Use setting</span>
             <span
-              aria-hidden='true'
-              className={`${enabled ? 'translate-x-9' : 'translate-x-0'}
-            pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+              className={`cursur-pointer inline-block h-[14px] w-[14px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out
+            ${enabled ? 'translate-x-5' : 'translate-x-0'}
+            `}
             />
           </Switch>
           <MoonIcon />

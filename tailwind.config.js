@@ -11,13 +11,12 @@ export default {
       colors: {
         lightmode: {
           primary: '#2D2D2D',
-          'input-bg': '#F4F4F4',
         },
         darkmode: {
           primary: '#FFF',
           container: '#1F1F1F',
-          'input-bg': '#757575',
         },
+        input: '#757575',
         accent: '#A445ED',
         black: {
           900: '#050505',
