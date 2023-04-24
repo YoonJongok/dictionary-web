@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { ReactComponent as ChevronUpDownIcon } from '../../assets/images/icon-arrow-down.svg';
+import { ReactComponent as ChevronUpDownIcon } from '../../../assets/images/icon-arrow-down.svg';
 
 export type SelectObj = { value: string };
 
@@ -26,7 +26,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({ selectConfig }) => {
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-sm cursor-pointer'>
+          <Listbox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-sm cursor-pointer'>
             {selectConfig.map((config, typographyIdx) => (
               <Listbox.Option
                 key={typographyIdx}

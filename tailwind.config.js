@@ -23,6 +23,7 @@ export default {
           100: '#3A3A3A',
         },
         grey: {
+          100: '#F4F4F4',
           200: '#E9E9E9',
         },
         error: '#FF5252',

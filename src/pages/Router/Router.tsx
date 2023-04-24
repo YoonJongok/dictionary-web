@@ -1,12 +1,12 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Layout from '../../components/Layout';
-import Home from '../Home';
+import Dictionary from '../Dictionary';
 
 export const Router = () => {
   return (
     <Layout>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Dictionary />} />
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </Layout>

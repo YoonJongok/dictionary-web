@@ -1,32 +1,33 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 import React, { FC, ReactNode } from 'react';
 
-const flexBox = cva('flex', {
+const flexBoxRow = cva(['flex', 'flex-row'], {
   variants: {
     intent: {
-      row: ['flex-row'],
-      column: ['flex-col'],
-    },
-    modifier: {
       flexCenterCenter: ['justify-center', 'items-center'],
       flexBetweenCenter: ['justify-between', 'items-center'],
       flexAroundCenter: ['justify-around', 'items-center'],
     },
-    defaultVariants: {
-      intent: 'row',
-    },
+    modifier: {},
+    defaultVariants: {},
   },
 });
 
-export interface FlexBoxProps
+export interface FlexBoxRowProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof flexBox> {
+    VariantProps<typeof flexBoxRow> {
   children: ReactNode;
 }
 
-export const FlexBox: FC<FlexBoxProps> = ({ className, intent, modifier, children, ...props }) => {
+export const FlexBoxRow: FC<FlexBoxRowProps> = ({
+  className,
+  intent,
+  modifier,
+  children,
+  ...props
+}) => {
   return (
-    <div {...props} className={flexBox({ intent, className, modifier })}>
+    <div {...props} className={flexBoxRow({ intent, className, modifier })}>
       {children}
     </div>
   );

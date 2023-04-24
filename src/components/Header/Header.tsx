@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { FlexBox } from '../FlexBox/FlexBox';
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import { ReactComponent as MoonIcon } from '../../assets/images/icon-moon.svg';
-import { SelectBox, SelectObj } from '../SelectBox/SelectBox';
-import { Switch } from '@headlessui/react';
-import clsx from 'clsx';
+import { SelectBox, SelectObj } from './SelectBox/SelectBox';
+import { DarkModeSwitch } from './DarkModeSwitch/DarkModeSwitch';
+import FlexBoxRow from '../FlexBoxRow';
 
 const typographyConfig: Array<SelectObj> = [
   { value: 'Sans Serif' },
@@ -16,35 +15,17 @@ export const Header: React.FC = () => {
   const [enabled, setEnabled] = useState(false);
 
   return (
-    <FlexBox intent={'row'} modifier={'flexBetweenCenter'} className='p-6'>
+    <FlexBoxRow intent={'flexBetweenCenter'} className='p-6'>
       <Logo />
-      <FlexBox intent={'row'} modifier={'flexAroundCenter'} className='gap-4'>
+      <FlexBoxRow intent={'flexAroundCenter'} className='gap-4'>
         <SelectBox selectConfig={typographyConfig} />
         <div className='w-[2px] h-8 bg-grey-200'></div>
-        <FlexBox intent={'row'} className='items-center gap-3'>
-          <Switch
-            checked={enabled}
-            onChange={setEnabled}
-            className={clsx(
-              'cursur-pointer relative inline-flex px-[2px] items-center h-[22px] w-[42px] shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75  bg-input',
-              {
-                'bg-accent': enabled,
-              }
-            )}
-          >
-            <span
-              className={clsx(
-                'cursur-pointer inline-block h-[14px] w-[14px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out translate-x-0',
-                {
-                  'translate-x-5': enabled,
-                }
-              )}
-            />
-          </Switch>
+        <FlexBoxRow className='items-center gap-3'>
+          <DarkModeSwitch isDarkMode={enabled} setDarkMode={setEnabled} />
           <MoonIcon className={`${enabled ? 'stroke-accent' : 'stroke-input'}`} />
-        </FlexBox>
-      </FlexBox>
-    </FlexBox>
+        </FlexBoxRow>
+      </FlexBoxRow>
+    </FlexBoxRow>
   );
 };
 
