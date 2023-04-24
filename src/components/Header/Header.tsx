@@ -34,7 +34,7 @@ export const Header: React.FC = () => {
             `}
             />
           </Switch>
-          <MoonIcon />
+          <MoonIcon className={`${enabled ? 'stroke-accent' : 'stroke-input'}`} />
         </FlexBox>
       </FlexBox>
     </FlexBox>
