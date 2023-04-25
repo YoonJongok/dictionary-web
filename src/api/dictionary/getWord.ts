@@ -14,6 +14,7 @@ const WordSchema = z.array(
         .optional()
     ),
     origin: z.string().optional(),
+    sourceUrls: z.array(z.string().optional()).optional(),
     meanings: z
       .array(
         z.object({
@@ -35,8 +36,15 @@ const WordSchema = z.array(
 type Word = z.infer<typeof WordSchema>;
 
 export const getWordByInput = async (word: string): Promise<Word> => {
+  if (word.length === 0) return [];
+
   const response = await apiService.get(`/${word}`);
-  WordSchema.parse(response.data);
+  const parsed = WordSchema.safeParse(response.data);
+
+  if (!parsed.success) {
+    throw new Error(parsed.error.message);
+  }
+
   return response.data;
 };
 

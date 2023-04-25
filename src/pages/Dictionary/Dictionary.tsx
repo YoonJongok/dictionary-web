@@ -6,45 +6,47 @@ import SectionTitle from '../../components/Section/SectionTitle';
 import SectionBody from '../../components/Section/SectionBody';
 import { Divider } from '../../components/Divider/Divider';
 import { getWordByInput } from '../../api/dictionary/getWord';
-
-const people = [
-  { id: 1, name: 'Wade Cooper' },
-  { id: 2, name: 'Arlene Mccoy' },
-  { id: 3, name: 'Devon Webb' },
-  { id: 4, name: 'Tom Cook' },
-  { id: 5, name: 'Tanya Fox' },
-  { id: 6, name: 'Hellen Schmidt' },
-];
+import { useQuery } from '@tanstack/react-query';
 
 export const Dictionary: React.FC = () => {
-  const [selected, setSelected] = useState(people[0]);
-  const [query, setQuery] = useState('');
+  const [input, setInput] = useState('');
 
-  useEffect(() => {
-    (async () => {
-      const response = await getWordByInput('hello');
-      console.log(response);
-    })();
-  }, []);
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['word', input],
+    queryFn: () => getWordByInput(input),
+  });
+
+  console.log(data);
+  console.log(error);
 
   return (
     <FlexBoxColumn className='items-center text-lightmode-primary  px-7'>
-      <Form />
-      <WordHeader />
-      <FlexBoxColumn>
-        <SectionTitle title='noun' />
-        <SectionBody />
-      </FlexBoxColumn>
+      <Form {...{ input, setInput }} />
+      {!isLoading && data && data.length > 0 && (
+        <>
+          <WordHeader word={data[0].word} phonetic={data[0].phonetic} />
+          {data[0].meanings && (
+            <>
+              <FlexBoxColumn>
+                <SectionTitle title='noun' />
+                <SectionBody meaning={data[0]?.meanings[0]} />
+              </FlexBoxColumn>
 
-      <FlexBoxColumn className='mb-8'>
-        <SectionTitle title='verb' />
-        <SectionBody />
-      </FlexBoxColumn>
-      <Divider />
-      <FlexBoxColumn className='py-7 text-left' fullWidth>
-        <p className='text-input underline text-base font-extralight'>Meaning</p>
-        <p className=' text-base font-light'>https://en.wiktionary.org/wiki/key board</p>
-      </FlexBoxColumn>
+              <FlexBoxColumn className='mb-8'>
+                <SectionTitle title='verb' />
+                <SectionBody meaning={data[0]?.meanings[1]} />
+              </FlexBoxColumn>
+              <Divider />
+              <FlexBoxColumn className='py-7 text-left gap-2' fullWidth>
+                <p className='text-input underline text-base font-extralight'>Source</p>
+                {data[0].sourceUrls && (
+                  <p className=' text-base font-light'>{data[0].sourceUrls[0]}</p>
+                )}
+              </FlexBoxColumn>
+            </>
+          )}
+        </>
+      )}
     </FlexBoxColumn>
   );
 };
