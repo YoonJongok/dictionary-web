@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlexBoxColumn } from '../../components/FlexBoxColumn/FlexBoxColumn';
 import WordHeader from './WordHeader';
 import Form from '../../components/Form';
 import SectionTitle from '../../components/Section/SectionTitle';
 import SectionBody from '../../components/Section/SectionBody';
 import { Divider } from '../../components/Divider/Divider';
+import { getWordByInput } from '../../api/dictionary/getWord';
 
 const people = [
   { id: 1, name: 'Wade Cooper' },
@@ -18,6 +19,13 @@ const people = [
 export const Dictionary: React.FC = () => {
   const [selected, setSelected] = useState(people[0]);
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      const response = await getWordByInput('hello');
+      console.log(response);
+    })();
+  }, []);
 
   const filteredPeople =
     query === ''
@@ -45,7 +53,7 @@ export const Dictionary: React.FC = () => {
       <Divider />
       <FlexBoxColumn className='py-7 text-left' fullWidth>
         <p className='text-input underline text-base font-extralight'>Meaning</p>
-        <p className=' text-base font-light'>https://en.wiktionary.org/wiki/keyboard</p>
+        <p className=' text-base font-light'>https://en.wiktionary.org/wiki/key board</p>
       </FlexBoxColumn>
     </FlexBoxColumn>
   );
