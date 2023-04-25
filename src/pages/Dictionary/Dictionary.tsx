@@ -11,13 +11,12 @@ import { useQuery } from '@tanstack/react-query';
 export const Dictionary: React.FC = () => {
   const [input, setInput] = useState('');
 
-  const { data, error, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['word', input],
     queryFn: () => getWordByInput(input),
   });
 
   console.log(data);
-  console.log(error);
 
   return (
     <FlexBoxColumn className='items-center text-lightmode-primary  px-7'>

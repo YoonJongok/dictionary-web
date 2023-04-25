@@ -7,22 +7,35 @@ interface FormProps {
 }
 
 export const Form: React.FC<FormProps> = ({ setInput, input }) => {
+  const [value, setValue] = React.useState<string>(input);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
+    setValue(e.target.value);
+  };
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setInput(value);
+
+    setValue('');
   };
 
   return (
-    <form className='relative w-full' onSubmit={(e) => e.preventDefault()}>
+    <form className='relative w-full'>
       <input
         placeholder='Search vocabulary'
         className='w-full px-6 py-4 bg-grey-100 rounded-xl text-base  text-lightmode-primary placeholder-slate-400'
         onChange={handleInputChange}
-        value={input}
+        value={value}
       />
 
-      <div className='absolute top-1/2 transform -translate-y-1/2 right-4'>
+      <button
+        type='submit'
+        onClick={handleSubmit}
+        className='absolute top-1/2 transform -translate-y-1/2 right-4'
+      >
         <SearchIcon />
-      </div>
+      </button>
     </form>
   );
 };
