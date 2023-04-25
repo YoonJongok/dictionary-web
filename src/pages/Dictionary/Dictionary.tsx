@@ -27,16 +27,6 @@ export const Dictionary: React.FC = () => {
     })();
   }, []);
 
-  const filteredPeople =
-    query === ''
-      ? people
-      : people.filter((person) =>
-          person.name
-            .toLowerCase()
-            .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, ''))
-        );
-
   return (
     <FlexBoxColumn className='items-center text-lightmode-primary  px-7'>
       <Form />
