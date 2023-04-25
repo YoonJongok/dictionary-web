@@ -17,10 +17,10 @@ interface SectionBodyProps {
 
 export const SectionBody: React.FC<SectionBodyProps> = ({ meaning }) => {
   return (
-    <FlexBoxColumn className='gap-4'>
+    <FlexBoxColumn className='items-start gap-4'>
       <p className='text-input text-lg font-extralight'>Meaning</p>
       <ul className='text-lightmode-primary'>
-        {meaning?.definitions.map((definition, index) => (
+        {meaning?.definitions.map((definition) => (
           <FlexBoxRow key={crypto.randomUUID()} intent={'flexStartStart'} className='gap-[20px] '>
             <div className='pt-[10px]'>
               <DotIcon />
@@ -30,15 +30,20 @@ export const SectionBody: React.FC<SectionBodyProps> = ({ meaning }) => {
         ))}
       </ul>
 
-      <FlexBoxRow intent={'flexStartCenter'} className=' mt-6'>
-        <p className='text-input text-lg font-extralight mr-10'>Synonyms</p>
-        {meaning?.definitions.map((definition, index) => (
-          <p key={crypto.randomUUID()} className='text-accent text-lg font-semibold'>
-            {/* TODO: Reformat synonyms */}
-            {definition.synonyms.join(', ')}
-          </p>
-        ))}
-      </FlexBoxRow>
+      <FlexBoxColumn className='mt-6'>
+        {meaning?.definitions[0]?.synonyms && meaning.definitions[0].synonyms.length > 0 && (
+          <>
+            <p className='text-input text-lg font-extralight'>Synonyms</p>
+            {meaning?.definitions.map(({ synonyms }) => {
+              return (
+                <p key={crypto.randomUUID()} className='text-accent text-lg font-semibold'>
+                  {synonyms.join(', ')}
+                </p>
+              );
+            })}
+          </>
+        )}
+      </FlexBoxColumn>
     </FlexBoxColumn>
   );
 };
