@@ -13,8 +13,7 @@ const typographyConfig: Array<SelectObj> = [
 ];
 
 export const Header: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
-  const isDarkMode = theme === 'dark';
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
     <FlexBoxRow intent={'flexBetweenCenter'}>

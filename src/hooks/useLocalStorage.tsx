@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const keyObj = {
-  theme: 'theme',
+  theme: 'darkMode',
 };
 
 const getStorageValue = <T,>(key: string) => {
@@ -20,7 +20,6 @@ export const useLocalStorage = <T,>(
   const [localStorageValue, setLocalStorageValue] = useState<T>(() => {
     return getStorageValue<T>(key);
   });
-
   useEffect(() => {
     key && localStorage.setItem(key, JSON.stringify(localStorageValue));
   }, [key, localStorageValue]);

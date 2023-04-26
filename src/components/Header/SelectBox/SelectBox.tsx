@@ -13,7 +13,7 @@ interface SelectBoxProps {
 export const SelectBox: React.FC<SelectBoxProps> = ({ selectConfig }) => {
   const [selected, setSelected] = useState(selectConfig[0]);
 
-  const { theme } = useTheme();
+  const { isDarkMode } = useTheme();
 
   return (
     <Listbox value={selected} onChange={setSelected}>
@@ -35,8 +35,8 @@ export const SelectBox: React.FC<SelectBoxProps> = ({ selectConfig }) => {
                 key={typographyIdx}
                 className={({ active }) =>
                   `relative cursor-pointer select-none py-2 px-3 text-gray-900 dark:text-white ${
-                    active && theme === 'dark' ? 'bg-black-900' : ''
-                  } ${active && theme === 'light' ? 'bg-amber-100' : ''}`
+                    active && isDarkMode ? 'bg-black-900' : ''
+                  } ${active && !isDarkMode ? 'bg-amber-100' : ''}`
                 }
                 value={config}
               >

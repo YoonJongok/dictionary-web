@@ -1,15 +1,15 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { keyObj, useLocalStorage } from '../../hooks/useLocalStorage';
 
 export type Theme = 'dark' | 'light';
 
 interface ThemeContextProps {
-  theme: Theme | null;
+  isDarkMode: boolean;
   toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextProps>({
-  theme: null,
+  isDarkMode: false,
   toggleTheme: () => {
     throw new Error('toggleTheme() not implemented yet');
   },
@@ -20,9 +20,11 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const { theme, toggleTheme } = useThemeContextValue();
+  const { isDarkMode, toggleTheme } = useThemeContextValue();
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>{children}</ThemeContext.Provider>
+  );
 };
 
 const setInitialTheme = (setLocalStorageValue: (value: Theme) => void): Theme => {
@@ -32,10 +34,11 @@ const setInitialTheme = (setLocalStorageValue: (value: Theme) => void): Theme =>
 
 const useThemeContextValue = () => {
   const { localStorageValue, setLocalStorageValue } = useLocalStorage<Theme>(keyObj.theme);
-
   const [theme, setTheme] = useState<Theme>(
     localStorageValue || setInitialTheme(setLocalStorageValue)
   );
+
+  const isDarkMode = theme === 'dark';
 
   const toggleTheme = () => {
     setTheme((prev) => {
@@ -51,7 +54,12 @@ const useThemeContextValue = () => {
     });
   };
 
-  return { theme, toggleTheme };
+  useEffect(() => {
+    setLocalStorageValue(isDarkMode ? 'dark' : 'light');
+    document.body.classList.toggle('dark', isDarkMode);
+  }, [setLocalStorageValue, isDarkMode]);
+
+  return { isDarkMode, toggleTheme };
 };
 
 export const useTheme = () => {
