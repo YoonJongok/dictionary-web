@@ -44,11 +44,9 @@ const useThemeContextValue = () => {
     setTheme((prev) => {
       if (prev === 'light') {
         document.documentElement.classList.add('dark');
-        setLocalStorageValue('dark');
         return 'dark';
       } else {
         document.documentElement.classList.remove('dark');
-        setLocalStorageValue('light');
         return 'light';
       }
     });

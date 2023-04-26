@@ -5,6 +5,7 @@ import { SelectBox, SelectObj } from './SelectBox/SelectBox';
 import { DarkModeSwitch } from './DarkModeSwitch/DarkModeSwitch';
 import FlexBoxRow from '../FlexBoxRow';
 import { useTheme } from '../../context/ThemeProvider/ThemeProvider';
+import { Divider } from '../Divider/Divider';
 
 const typographyConfig: Array<SelectObj> = [
   { value: 'Sans Serif' },
@@ -20,7 +21,7 @@ export const Header: React.FC = () => {
       <Logo />
       <FlexBoxRow intent={'flexAroundCenter'} className='gap-4 tablet:gap-[26px]'>
         <SelectBox selectConfig={typographyConfig} />
-        <div className='w-[2px] h-8 bg-grey-200'></div>
+        <Divider axis='vertical' />
         <FlexBoxRow className='items-center gap-3 tablet:gap-5'>
           <DarkModeSwitch isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
           <MoonIcon className={`${isDarkMode ? 'stroke-accent' : 'stroke-input'}`} />

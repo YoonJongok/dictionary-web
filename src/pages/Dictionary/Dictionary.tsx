@@ -40,7 +40,7 @@ export const Dictionary: React.FC = () => {
             )}
             {data[0].sourceUrls && (
               <>
-                <Divider />
+                <Divider axis='horizontal' />
                 <FlexBoxColumn className='py-7 text-left gap-2' fullWidth>
                   <div className='w-fit border-b-[1px] border-input '>
                     <p className='text-input text-base font-extralight'>Source</p>
