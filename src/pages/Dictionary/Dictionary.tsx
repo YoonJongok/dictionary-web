@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 export const Dictionary: React.FC = () => {
   const [input, setInput] = useState('');
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, status } = useQuery({
     queryKey: ['word', input],
     queryFn: () => getWordByInput(input),
   });
@@ -22,10 +22,12 @@ export const Dictionary: React.FC = () => {
   return (
     <FlexBoxColumn className='items-start text-lightmode-primary dark:bg-black-900 leading-relaxed tracking-wide gap-0 tablet:gap-6'>
       <Form {...{ input, setInput }} />
+      {status === 'loading' && <p className='text-input'>Loading...</p>}
+      {status === 'error' && <p className='text-input'>Can't find the word</p>}
       {!isLoading && data && data.length > 0 && (
         <>
           <WordHeader word={data[0].word} phonetic={data[0].phonetic} />
-          <FlexBoxColumn>
+          <FlexBoxColumn className='w-full'>
             {isNounExist && (
               <>
                 <SectionTitle title='noun' />

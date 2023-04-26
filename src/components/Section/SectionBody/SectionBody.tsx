@@ -2,17 +2,10 @@ import React from 'react';
 import { FlexBoxColumn } from '../../FlexBoxColumn/FlexBoxColumn';
 import { FlexBoxRow } from '../../FlexBoxRow/FlexBoxRow';
 import { ReactComponent as DotIcon } from '../../../assets/images/icon-dot.svg';
+import { Meaning } from '../../../api/dictionary/dictionary.types';
 
 interface SectionBodyProps {
-  meaning?: {
-    partOfSpeech: string;
-    definitions: {
-      definition?: string;
-      example?: string;
-      synonyms: Array<string | undefined>;
-      antonyms: Array<string | undefined>;
-    }[];
-  };
+  meaning?: Meaning;
 }
 
 export const SectionBody: React.FC<SectionBodyProps> = ({ meaning }) => {
