@@ -7,9 +7,12 @@ import SectionBody from '../../components/Section/SectionBody';
 import { Divider } from '../../components/Divider/Divider';
 import { getWordByInput } from '../../api/dictionary/getWord';
 import { useQuery } from '@tanstack/react-query';
+import { useTheme } from '../../context/ThemeProvider/ThemeProvider';
 
 export const Dictionary: React.FC = () => {
   const [input, setInput] = useState('');
+
+  const { theme, toggleTheme } = useTheme();
 
   const { data, isLoading } = useQuery({
     queryKey: ['word', input],
@@ -20,7 +23,7 @@ export const Dictionary: React.FC = () => {
   const isVerbExist = data && data[0]?.meanings && data[0].meanings[1];
 
   return (
-    <FlexBoxColumn className='items-start text-lightmode-primary  px-7'>
+    <FlexBoxColumn className='items-start text-lightmode-primary  px-7 dark:bg-black-900'>
       <Form {...{ input, setInput }} />
       {!isLoading && data && data.length > 0 && (
         <>

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import { ReactComponent as MoonIcon } from '../../assets/images/icon-moon.svg';
 import { SelectBox, SelectObj } from './SelectBox/SelectBox';
 import { DarkModeSwitch } from './DarkModeSwitch/DarkModeSwitch';
 import FlexBoxRow from '../FlexBoxRow';
+import { useTheme } from '../../context/ThemeProvider/ThemeProvider';
 
 const typographyConfig: Array<SelectObj> = [
   { value: 'Sans Serif' },
@@ -12,7 +13,8 @@ const typographyConfig: Array<SelectObj> = [
 ];
 
 export const Header: React.FC = () => {
-  const [enabled, setEnabled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const isDarkMode = theme === 'dark';
 
   return (
     <FlexBoxRow intent={'flexBetweenCenter'} className='p-6'>
@@ -21,8 +23,8 @@ export const Header: React.FC = () => {
         <SelectBox selectConfig={typographyConfig} />
         <div className='w-[2px] h-8 bg-grey-200'></div>
         <FlexBoxRow className='items-center gap-3'>
-          <DarkModeSwitch isDarkMode={enabled} setDarkMode={setEnabled} />
-          <MoonIcon className={`${enabled ? 'stroke-accent' : 'stroke-input'}`} />
+          <DarkModeSwitch isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+          <MoonIcon className={`${isDarkMode ? 'stroke-accent' : 'stroke-input'}`} />
         </FlexBoxRow>
       </FlexBoxRow>
     </FlexBoxRow>
