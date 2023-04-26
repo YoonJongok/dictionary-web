@@ -19,7 +19,7 @@ export const SectionBody: React.FC<SectionBodyProps> = ({ meaning }) => {
   return (
     <FlexBoxColumn className='items-start gap-4'>
       <p className='text-input text-lg font-extralight'>Meaning</p>
-      <ul className='text-lightmode-primary'>
+      <ul className='text-lightmode-primary dark:text-white '>
         {meaning?.definitions.map((definition) => (
           <FlexBoxRow key={crypto.randomUUID()} intent={'flexStartStart'} className='gap-[20px] '>
             <div className='pt-[10px]'>
@@ -30,7 +30,7 @@ export const SectionBody: React.FC<SectionBodyProps> = ({ meaning }) => {
         ))}
       </ul>
 
-      <FlexBoxColumn className='mt-6'>
+      <FlexBoxColumn className='mt-6 gap-3'>
         {meaning?.definitions[0]?.synonyms && meaning.definitions[0].synonyms.length > 0 && (
           <>
             <p className='text-input text-lg font-extralight'>Synonyms</p>

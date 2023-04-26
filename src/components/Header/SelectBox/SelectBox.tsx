@@ -13,11 +13,11 @@ export const SelectBox: React.FC<SelectBoxProps> = ({ selectConfig }) => {
 
   return (
     <Listbox value={selected} onChange={setSelected}>
-      <div className='relative mt-1 w-[130px] cursor-pointer'>
-        <Listbox.Button className='cursor-pointer relative w-full rounded-lg bg-white py-2 pl-3 pr-10 text-left text-sm text-lightmode-primary font-bold focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 '>
-          <span className='block truncate'>{selected.value}</span>
-          <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
-            <ChevronUpDownIcon aria-hidden='true' />
+      <div className='relative mt-1 w-[120px] cursor-pointer'>
+        <Listbox.Button className='cursor-pointer relative w-full rounded-lg  py-2 pl-3  text-left text-base text-lightmode-primary dark:text-white font-bold focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white'>
+          <span className='block '>{selected.value}</span>
+          <span className='absolute inset-y-0 right-0 flex items-center'>
+            <ChevronUpDownIcon />
           </span>
         </Listbox.Button>
         <Transition

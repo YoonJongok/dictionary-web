@@ -23,7 +23,7 @@ export const Dictionary: React.FC = () => {
   const isVerbExist = data && data[0]?.meanings && data[0].meanings[1];
 
   return (
-    <FlexBoxColumn className='items-start text-lightmode-primary  px-7 dark:bg-black-900'>
+    <FlexBoxColumn className='items-start text-lightmode-primary  px-7 dark:bg-black-900  leading-relaxed tracking-wide'>
       <Form {...{ input, setInput }} />
       {!isLoading && data && data.length > 0 && (
         <>
@@ -44,8 +44,10 @@ export const Dictionary: React.FC = () => {
             <>
               <Divider />
               <FlexBoxColumn className='py-7 text-left gap-2' fullWidth>
-                <p className='text-input underline text-base font-extralight'>Source</p>
-                <p className=' text-base font-light'>{data[0].sourceUrls[0]}</p>
+                <div className='w-fit border-b-[1px] border-input '>
+                  <p className='text-input text-base font-extralight'>Source</p>
+                </div>
+                <p className=' text-base font-light dark:text-white'>{data[0].sourceUrls[0]}</p>
               </FlexBoxColumn>
             </>
           )}

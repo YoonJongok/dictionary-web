@@ -7,7 +7,7 @@ interface LayoutProps {
 }
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <FlexBoxColumn className='w-full h-full min-h-screen'>
+    <FlexBoxColumn className='w-full h-full min-h-screen dark:bg-black-900'>
       <Header />
       {children}
     </FlexBoxColumn>
