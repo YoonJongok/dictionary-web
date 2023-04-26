@@ -7,12 +7,9 @@ import SectionBody from '../../components/Section/SectionBody';
 import { Divider } from '../../components/Divider/Divider';
 import { getWordByInput } from '../../api/dictionary/getWord';
 import { useQuery } from '@tanstack/react-query';
-import { useTheme } from '../../context/ThemeProvider/ThemeProvider';
 
 export const Dictionary: React.FC = () => {
   const [input, setInput] = useState('');
-
-  const { theme, toggleTheme } = useTheme();
 
   const { data, isLoading } = useQuery({
     queryKey: ['word', input],
@@ -23,23 +20,25 @@ export const Dictionary: React.FC = () => {
   const isVerbExist = data && data[0]?.meanings && data[0].meanings[1];
 
   return (
-    <FlexBoxColumn className='items-start text-lightmode-primary  px-7 dark:bg-black-900  leading-relaxed tracking-wide'>
+    <FlexBoxColumn className='items-start text-lightmode-primary dark:bg-black-900 leading-relaxed tracking-wide gap-0 tablet:gap-10'>
       <Form {...{ input, setInput }} />
       {!isLoading && data && data.length > 0 && (
         <>
           <WordHeader word={data[0].word} phonetic={data[0].phonetic} />
-          {isNounExist && (
-            <FlexBoxColumn>
-              <SectionTitle title='noun' />
-              <SectionBody meaning={data[0].meanings?.[0]} />
-            </FlexBoxColumn>
-          )}
-          {isVerbExist && (
-            <FlexBoxColumn className='mb-8'>
-              <SectionTitle title='verb' />
-              <SectionBody meaning={data[0].meanings?.[1]} />
-            </FlexBoxColumn>
-          )}
+          <FlexBoxColumn>
+            {isNounExist && (
+              <>
+                <SectionTitle title='noun' />
+                <SectionBody meaning={data[0].meanings?.[0]} />
+              </>
+            )}
+            {isVerbExist && (
+              <>
+                <SectionTitle title='verb' />
+                <SectionBody meaning={data[0].meanings?.[1]} />
+              </>
+            )}
+          </FlexBoxColumn>
           {data[0].sourceUrls && (
             <>
               <Divider />

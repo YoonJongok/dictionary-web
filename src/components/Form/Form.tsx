@@ -24,7 +24,7 @@ export const Form: React.FC<FormProps> = ({ setInput, input }) => {
     <form className='relative w-full'>
       <input
         placeholder='Search vocabulary'
-        className='w-full px-6 py-4 bg-grey-100 dark:bg-darkmode-container rounded-xl text-base  text-lightmode-primary dark:text-white placeholder-slate-400 '
+        className='w-full px-6 py-4 bg-grey-100 dark:bg-darkmode-container rounded-xl text-base  text-lightmode-primary dark:text-white placeholder-slate-400'
         onChange={handleInputChange}
         value={value}
       />

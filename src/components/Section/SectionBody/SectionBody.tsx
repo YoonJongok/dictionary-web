@@ -19,7 +19,7 @@ export const SectionBody: React.FC<SectionBodyProps> = ({ meaning }) => {
   return (
     <FlexBoxColumn className='items-start gap-4'>
       <p className='text-input text-lg font-extralight'>Meaning</p>
-      <ul className='text-lightmode-primary dark:text-white '>
+      <ul className='text-lightmode-primary dark:text-white tablet:pl-[22px]'>
         {meaning?.definitions.map((definition) => (
           <FlexBoxRow key={crypto.randomUUID()} intent={'flexStartStart'} className='gap-[20px] '>
             <div className='pt-[10px]'>

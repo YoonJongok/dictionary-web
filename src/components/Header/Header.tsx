@@ -17,12 +17,12 @@ export const Header: React.FC = () => {
   const isDarkMode = theme === 'dark';
 
   return (
-    <FlexBoxRow intent={'flexBetweenCenter'} className='p-6'>
+    <FlexBoxRow intent={'flexBetweenCenter'}>
       <Logo />
-      <FlexBoxRow intent={'flexAroundCenter'} className='gap-4'>
+      <FlexBoxRow intent={'flexAroundCenter'} className='gap-4 tablet:gap-[26px]'>
         <SelectBox selectConfig={typographyConfig} />
         <div className='w-[2px] h-8 bg-grey-200'></div>
-        <FlexBoxRow className='items-center gap-3'>
+        <FlexBoxRow className='items-center gap-3 tablet:gap-5'>
           <DarkModeSwitch isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
           <MoonIcon className={`${isDarkMode ? 'stroke-accent' : 'stroke-input'}`} />
         </FlexBoxRow>
