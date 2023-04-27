@@ -4,8 +4,8 @@ import { ReactComponent as MoonIcon } from '../../assets/images/icon-moon.svg';
 import { SelectBox, SelectObj } from './SelectBox/SelectBox';
 import { DarkModeSwitch } from './DarkModeSwitch/DarkModeSwitch';
 import FlexBoxRow from '../FlexBoxRow';
-import { useTheme } from '../../context/ThemeProvider/ThemeProvider';
 import { Divider } from '../Divider/Divider';
+import { useTheme } from '../../context/ThemeProvider/ThemeProvider';
 
 const typographyConfig: Array<SelectObj> = [
   { value: 'Sans Serif' },

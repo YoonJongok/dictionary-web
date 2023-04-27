@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { ReactComponent as ChevronUpDownIcon } from '../../../assets/images/icon-arrow-down.svg';
-import { useTheme } from '../../../context/ThemeProvider/ThemeProvider';
 import { FlexBoxRow } from '../../FlexBoxRow/FlexBoxRow';
+import { useTheme } from '../../../context/ThemeProvider/ThemeProvider';
 
 export type SelectObj = { value: string };
 

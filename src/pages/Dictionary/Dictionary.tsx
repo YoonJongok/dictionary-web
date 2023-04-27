@@ -7,6 +7,7 @@ import SectionBody from '../../components/Section/SectionBody';
 import { Divider } from '../../components/Divider/Divider';
 import { getWordByInput } from '../../api/dictionary/getWord';
 import { useQuery } from '@tanstack/react-query';
+import { getValidAudio } from '../../utils/audio';
 
 export const Dictionary: React.FC = () => {
   const [input, setInput] = useState('');
@@ -15,6 +16,8 @@ export const Dictionary: React.FC = () => {
     queryKey: ['word', input],
     queryFn: () => getWordByInput(input),
   });
+
+  const fetchedAudio = getValidAudio(data);
 
   const isNounExist = data && data[0]?.meanings && data[0].meanings[0];
   const isVerbExist = data && data[0]?.meanings && data[0].meanings[1];
@@ -26,7 +29,7 @@ export const Dictionary: React.FC = () => {
       {status === 'error' && <p className='text-input'>Can't find the word</p>}
       {!isLoading && data && data.length > 0 && (
         <>
-          <WordHeader word={data[0].word} phonetic={data[0].phonetic} />
+          <WordHeader word={data[0].word} phonetic={data[0].phonetic} audio={fetchedAudio} />
           <FlexBoxColumn className='w-full'>
             {isNounExist && (
               <>

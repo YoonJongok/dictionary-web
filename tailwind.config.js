@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 export default {
   darkMode: 'class',
@@ -10,6 +11,11 @@ export default {
       desktop: '1280px',
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', ...fontFamily.sans],
+        mono: ['var(--font-inconsolata)', ...fontFamily.mono],
+        serif: ['var(--font-lora)', ...fontFamily.serif],
+      },
       colors: {
         lightmode: {
           primary: '#2D2D2D',
