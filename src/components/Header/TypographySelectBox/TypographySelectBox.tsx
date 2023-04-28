@@ -2,26 +2,37 @@ import React, { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { ReactComponent as ChevronUpDownIcon } from '../../../assets/images/icon-arrow-down.svg';
 import { FlexBoxRow } from '../../FlexBoxRow/FlexBoxRow';
-import { useTheme } from '../../../context/ThemeProvider/ThemeProvider';
+import { Typography, TypographyKey, useTheme } from '../../../context/ThemeProvider/ThemeProvider';
 
-const typographyConfig: Array<string> = ['Sans Serif', 'Serif', 'Mono'];
+export const typographyConfig: Typography[] = [
+  {
+    key: 'Sans Serif',
+    value: 'Inter, sans-serif',
+  },
+  { key: 'Serif', value: 'Lora, serif' },
+  { key: 'Mono', value: 'Inconsolata, monospace' },
+];
 
 export const TypographySelectBox: React.FC = () => {
-  const [selected, setSelected] = useState(typographyConfig[0]);
+  const { isDarkMode, switchFont, font } = useTheme();
 
-  const { isDarkMode, switchFont } = useTheme();
+  const [selected, setSelected] = useState<Typography>(font);
 
-  const handleFontChange = (value: string) => {
-    setSelected(value);
-    switchFont(value);
+  const handleFontChange = (value: TypographyKey) => {
+    const newTypography = typographyConfig.find(
+      (typography) => typography.key === value
+    ) as Typography;
+
+    setSelected(newTypography);
+    switchFont(newTypography);
   };
 
   return (
-    <Listbox value={selected} onChange={handleFontChange}>
+    <Listbox value={selected.key} onChange={handleFontChange}>
       <div className='relative mt-1 w-[120px] cursor-pointer'>
         <Listbox.Button className='cursor-pointer relative w-full rounded-lg  pb-1 pl-3  text-left text-base text-lightmode-primary dark:text-white font-bold focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white'>
           <FlexBoxRow intent={'flexStartCenter'} className='gap-3'>
-            {selected} <ChevronUpDownIcon />
+            {selected.key} <ChevronUpDownIcon />
           </FlexBoxRow>
         </Listbox.Button>
         <Transition
@@ -39,13 +50,13 @@ export const TypographySelectBox: React.FC = () => {
                     active && isDarkMode ? 'bg-black-900' : ''
                   } ${active && !isDarkMode ? 'bg-amber-100' : ''}`
                 }
-                value={typography}
+                value={typography.key}
               >
                 {({ selected }) => (
                   <span
                     className={`block  ${selected ? 'font-medium' : 'font-light text-slate-500'}`}
                   >
-                    {typography}
+                    {typography.key}
                   </span>
                 )}
               </Listbox.Option>

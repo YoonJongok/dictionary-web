@@ -1,20 +1,26 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { keyObj, useLocalStorage } from '../../hooks/useLocalStorage';
+import { typographyConfig } from '../../components/Header/TypographySelectBox/TypographySelectBox';
 
 export type Theme = 'dark' | 'light';
+export type TypographyKey = 'Sans Serif' | 'Serif' | 'Mono';
+export type TypographyValue = 'Inter, sans-serif' | 'Lora, serif' | 'Inconsolata, monospace';
+export type Typography = { key: TypographyKey; value: TypographyValue };
 
 interface ThemeContextProps {
   isDarkMode: boolean;
   toggleTheme: () => void;
-  switchFont: (font: string) => void;
+  switchFont: (font: Typography) => void;
+  font: Typography;
 }
 
 const ThemeContext = createContext<ThemeContextProps>({
   isDarkMode: false,
+  font: { key: 'Sans Serif', value: 'Inter, sans-serif' },
   toggleTheme: () => {
     throw new Error('toggleTheme() not implemented yet');
   },
-  switchFont: (font: string) => {
+  switchFont: (font: Typography) => {
     throw new Error(`${font} toggleFont() not implemented yet`);
   },
 });
@@ -24,10 +30,10 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const { isDarkMode, toggleTheme, switchFont } = useThemeContextValue();
+  const { isDarkMode, toggleTheme, switchFont, font } = useThemeContextValue();
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme, switchFont }}>
+    <ThemeContext.Provider value={{ isDarkMode, toggleTheme, switchFont, font }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -39,7 +45,7 @@ const setInitialTheme = (setLocalStorageValue: (value: Theme) => void): Theme =>
 };
 
 const useThemeContextValue = () => {
-  const [font, setFont] = useState<string>('Serif');
+  const [font, setFont] = useState<Typography>(typographyConfig[0]);
 
   const { localStorageValue, setLocalStorageValue } = useLocalStorage<Theme>(keyObj.theme);
   const [theme, setTheme] = useState<Theme>(
@@ -60,18 +66,18 @@ const useThemeContextValue = () => {
     });
   };
 
-  const switchFont = (font: string) => {
+  const switchFont = (font: Typography) => {
     setFont(font);
   };
 
-  document.body.style.fontFamily = font;
+  document.body.style.fontFamily = font.value;
 
   useEffect(() => {
     setLocalStorageValue(isDarkMode ? 'dark' : 'light');
     document.body.classList.toggle('dark', isDarkMode);
   }, [setLocalStorageValue, isDarkMode]);
 
-  return { isDarkMode, toggleTheme, switchFont };
+  return { isDarkMode, toggleTheme, switchFont, font };
 };
 
 export const useTheme = () => {
