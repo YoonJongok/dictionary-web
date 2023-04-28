@@ -6,12 +6,16 @@ export type Theme = 'dark' | 'light';
 interface ThemeContextProps {
   isDarkMode: boolean;
   toggleTheme: () => void;
+  switchFont: (font: string) => void;
 }
 
 const ThemeContext = createContext<ThemeContextProps>({
   isDarkMode: false,
   toggleTheme: () => {
     throw new Error('toggleTheme() not implemented yet');
+  },
+  switchFont: (font: string) => {
+    throw new Error(`${font} toggleFont() not implemented yet`);
   },
 });
 
@@ -20,10 +24,12 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const { isDarkMode, toggleTheme } = useThemeContextValue();
+  const { isDarkMode, toggleTheme, switchFont } = useThemeContextValue();
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ isDarkMode, toggleTheme, switchFont }}>
+      {children}
+    </ThemeContext.Provider>
   );
 };
 
@@ -33,6 +39,8 @@ const setInitialTheme = (setLocalStorageValue: (value: Theme) => void): Theme =>
 };
 
 const useThemeContextValue = () => {
+  const [font, setFont] = useState<string>('Serif');
+
   const { localStorageValue, setLocalStorageValue } = useLocalStorage<Theme>(keyObj.theme);
   const [theme, setTheme] = useState<Theme>(
     localStorageValue || setInitialTheme(setLocalStorageValue)
@@ -52,12 +60,18 @@ const useThemeContextValue = () => {
     });
   };
 
+  const switchFont = (font: string) => {
+    setFont(font);
+  };
+
+  document.body.style.fontFamily = font;
+
   useEffect(() => {
     setLocalStorageValue(isDarkMode ? 'dark' : 'light');
     document.body.classList.toggle('dark', isDarkMode);
   }, [setLocalStorageValue, isDarkMode]);
 
-  return { isDarkMode, toggleTheme };
+  return { isDarkMode, toggleTheme, switchFont };
 };
 
 export const useTheme = () => {

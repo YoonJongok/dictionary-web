@@ -12,9 +12,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', ...fontFamily.sans],
-        mono: ['var(--font-inconsolata)', ...fontFamily.mono],
-        serif: ['var(--font-lora)', ...fontFamily.serif],
+        Mono: ['Inconsolata', ...fontFamily.mono],
+        Serif: ['Lora', ...fontFamily.serif],
+        Sanserif: ['Inter', ...fontFamily.sans],
       },
       colors: {
         lightmode: {

@@ -4,23 +4,24 @@ import { ReactComponent as ChevronUpDownIcon } from '../../../assets/images/icon
 import { FlexBoxRow } from '../../FlexBoxRow/FlexBoxRow';
 import { useTheme } from '../../../context/ThemeProvider/ThemeProvider';
 
-export type SelectObj = { value: string };
+const typographyConfig: Array<string> = ['Sans Serif', 'Serif', 'Mono'];
 
-interface SelectBoxProps {
-  selectConfig: Array<SelectObj>;
-}
+export const TypographySelectBox: React.FC = () => {
+  const [selected, setSelected] = useState(typographyConfig[0]);
 
-export const SelectBox: React.FC<SelectBoxProps> = ({ selectConfig }) => {
-  const [selected, setSelected] = useState(selectConfig[0]);
+  const { isDarkMode, switchFont } = useTheme();
 
-  const { isDarkMode } = useTheme();
+  const handleFontChange = (value: string) => {
+    setSelected(value);
+    switchFont(value);
+  };
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox value={selected} onChange={handleFontChange}>
       <div className='relative mt-1 w-[120px] cursor-pointer'>
         <Listbox.Button className='cursor-pointer relative w-full rounded-lg  pb-1 pl-3  text-left text-base text-lightmode-primary dark:text-white font-bold focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white'>
           <FlexBoxRow intent={'flexStartCenter'} className='gap-3'>
-            {selected.value} <ChevronUpDownIcon />
+            {selected} <ChevronUpDownIcon />
           </FlexBoxRow>
         </Listbox.Button>
         <Transition
@@ -30,7 +31,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({ selectConfig }) => {
           leaveTo='opacity-0'
         >
           <Listbox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-black-100 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-sm cursor-pointer'>
-            {selectConfig.map((config, typographyIdx) => (
+            {typographyConfig.map((typography, typographyIdx) => (
               <Listbox.Option
                 key={typographyIdx}
                 className={({ active }) =>
@@ -38,13 +39,13 @@ export const SelectBox: React.FC<SelectBoxProps> = ({ selectConfig }) => {
                     active && isDarkMode ? 'bg-black-900' : ''
                   } ${active && !isDarkMode ? 'bg-amber-100' : ''}`
                 }
-                value={config}
+                value={typography}
               >
                 {({ selected }) => (
                   <span
                     className={`block  ${selected ? 'font-medium' : 'font-light text-slate-500'}`}
                   >
-                    {config.value}
+                    {typography}
                   </span>
                 )}
               </Listbox.Option>
